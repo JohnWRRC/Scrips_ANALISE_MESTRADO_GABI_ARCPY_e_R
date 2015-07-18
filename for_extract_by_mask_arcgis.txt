@@ -1,0 +1,14 @@
+import arcpy
+from arcpy import env
+import os
+arcpy.env.workspace = r"E:\data_2015\___john\Gabi_mapeamento_2015_05_d28\imagens_rap\imagens_p1"
+buffer="paisagens_buffer_2k_mais_500m"
+# Process: Convert to ascii
+rasterList = arcpy.ListRasters()
+
+
+arcpy.env.workspace = r"E:\data_2015\___john\Gabi_mapeamento_2015_05_d28\imagens_rap\imagens_recorte_p1"
+for rt in rasterList:
+	ofile2=unicode(""+os.path.splitext(rt)[0]+"_extact.img")
+	print rt + " - " + ofile2
+	arcpy.gp.ExtractByMask_sa(buffer, rt , ofile2)
